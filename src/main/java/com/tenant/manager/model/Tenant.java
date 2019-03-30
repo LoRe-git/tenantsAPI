@@ -2,6 +2,7 @@ package com.tenant.manager.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,48 +11,53 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
-@Table(name = "person")
-public class Person implements Serializable {
+@Table(name = "tenant")
+public class Tenant implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 //	@Id
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 //	@Column(name = "autoId")
 //	private int autoId;
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
 	@Column(name = "mobile")
 	private String mobile;
-	
+
 	@Column(name = "name")
 	private String name;
-	
-	@Id
-	@Column(name = "id")
-	private String id;
-	
+
+	@Column(name = "gov_id")
+	private String gov_id;
+
 	@Column(name = "doj")
 	private Date doj;
-	
+
 	@Column(name = "address")
 	private String address;
-	
+
 	@Column(name = "room")
 	private String room;
-	
+
 	@Column(name = "amount")
 	private int amount;
-	
+
 	@Column(name = "email")
 	private String email;
-	
-	@Column (name = "bid")
+
+	@Column(name = "bid")
 	private String bId;
-	
+
 //	@Column(name = "dov")
 //	private Date dov;
-	
+
 	/*
 	 * public int getAutoId() { return autoId; }
 	 * 
@@ -74,12 +80,12 @@ public class Person implements Serializable {
 		this.name = name;
 	}
 
-	public String getId() {
-		return id;
+	public String getGov_Id() {
+		return gov_id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setGov_Id(String id) {
+		this.gov_id = id;
 	}
 
 	public Date getDoj() {
@@ -138,9 +144,18 @@ public class Person implements Serializable {
 //		this.dov = dov;
 //	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return this.id;
+	}
+
 	@Override
 	public String toString() {
-		return "Person [mobile=" + mobile + ", name=" + name + ", id=" + id + ", doj=" + doj + ", address=" + address
-				+ ", room=" + room + ", amount=" + amount + ", email=" + email + ", bId=" + bId + "]";
+		return "Person [id=" + id + ", mobile=" + mobile + ", name=" + name + ", id=" + gov_id + ", doj=" + doj
+				+ ", address=" + address + ", room=" + room + ", amount=" + amount + ", email=" + email + ", bId=" + bId
+				+ "]";
 	}
 }

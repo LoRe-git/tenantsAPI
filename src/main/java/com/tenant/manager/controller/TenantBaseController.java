@@ -5,48 +5,67 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tenant.manager.beans.Tenant;
-import com.tenant.manager.model.Person;
-import com.tenant.manager.service.TenantService;
+import com.tenant.manager.dto.TenantDto;
+import com.tenant.manager.service.TenantJpaService;
 
 @RestController
-@RequestMapping("tenant")
+@RequestMapping("api/v1/tenants")
 public class TenantBaseController {
 
-	@Autowired
-	private Tenant tenant;
-	
-	@Autowired
-	private TenantService tenantService;
+//	@Autowired
+//	private TenantService tenantService;
 
-	@GetMapping("/")
+	@Autowired
+	private TenantJpaService tenantJpaService;
+
+	@GetMapping("/check")
 	public String healthCheck() {
 		return "ok";
 	}
 
-	@GetMapping("get/{id}")
-	public Tenant getTenant(@RequestParam(name = "name", required = false, defaultValue = "Unknown") String name) {
-		tenant.setName(name);
-		return tenant;
+	@GetMapping("{id}")
+	public ResponseEntity<TenantDto> getTenant(@PathVariable("id") int id) {
+		System.out.println(id);
+//		return new ResponseEntity<TenantDto>(tenantService.getTenant(id), HttpStatus.OK);
+		return new ResponseEntity<TenantDto>(tenantJpaService.getTenant(id), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = "application/json")
-	public Tenant updateTenant(@RequestBody Tenant t) {
-		tenant.setName(t.getName());
-		tenant.setAddress(t.getAddress());
-		return tenant;
+	@GetMapping("/")
+	public ResponseEntity<List<TenantDto>> getAllTenants() {
+		/*
+		 * List<TenantDto> allTenants = tenantService.getAllTenants(); return new
+		 * ResponseEntity<List<TenantDto>>(allTenants, HttpStatus.OK);
+		 */
+		return new ResponseEntity<List<TenantDto>>(tenantJpaService.getAllTenants(), HttpStatus.OK);
 	}
-	
-	@GetMapping("allTenants")
-	public ResponseEntity<List<Person>> getAllTenants(){
-		List<Person> allTenants = tenantService.getAllTenants();
-		return new ResponseEntity<List<Person>>(allTenants, HttpStatus.OK);
+
+	@PostMapping()
+	public HttpStatus addTenant(@RequestBody TenantDto newTenant) {
+		tenantJpaService.addTenant(newTenant);
+		return HttpStatus.CREATED;
 	}
+
+	@DeleteMapping("{id}")
+	public HttpStatus deleteTenant(@PathVariable("id") int id) {
+		tenantJpaService.deleteTenant(id);
+		return HttpStatus.OK;
+	}
+
+	@PutMapping(consumes = "application/json")
+	public HttpStatus updateTenant(@RequestBody TenantDto updatedTenant) {
+//		tenantService.updateTenant(t);
+
+		tenantJpaService.addTenant(updatedTenant);
+		return HttpStatus.OK;
+	}
+
 }
