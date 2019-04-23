@@ -45,5 +45,11 @@ public class TenantServiceImpl implements TenantService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<TenantDto> searchTenants(String keyWord, String hID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 		
 }

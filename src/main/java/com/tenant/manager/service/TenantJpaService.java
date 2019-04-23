@@ -47,4 +47,11 @@ public class TenantJpaService implements TenantService{
 		tenantRepository.deleteById(id);
 	}
 
+	@Override
+	public List<TenantDto> searchTenants(String keyWord, String hID) {
+		return TenantUtils.toConvertDtoList(tenantRepository.searchBy(keyWord, hID));
+	}
+	
+	
+
 }

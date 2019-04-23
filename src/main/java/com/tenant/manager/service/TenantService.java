@@ -10,4 +10,5 @@ public interface TenantService {
 	void updateTenant(TenantDto tenant);
 	void addTenant(TenantDto newTenant);
 	void deleteTenant(int id);
+	List<TenantDto> searchTenants(String keyWord, String hID);
 }

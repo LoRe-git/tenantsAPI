@@ -67,5 +67,10 @@ public class TenantBaseController {
 		tenantJpaService.addTenant(updatedTenant);
 		return HttpStatus.OK;
 	}
+	
+	@GetMapping("search/{hostelId}/{keyWord}")
+	public ResponseEntity<List<TenantDto>> searchTenants(@PathVariable("keyWord") String keyWord, @PathVariable("hostelId") String hostelID){
+		return new ResponseEntity<List<TenantDto>>(tenantJpaService.searchTenants(keyWord, hostelID), HttpStatus.OK);
+	}
 
 }
