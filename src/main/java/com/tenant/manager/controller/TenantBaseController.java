@@ -52,6 +52,7 @@ public class TenantBaseController {
 
 	@PostMapping()
 	public HttpStatus addTenant(@RequestBody TenantDto newTenant) {
+		System.out.println("New Tenant: " + newTenant);
 		tenantJpaService.addTenant(newTenant);
 		return HttpStatus.CREATED;
 	}
