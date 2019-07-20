@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="block")
-public class Block implements Serializable {
+@Table(name="branch")
+public class Branch implements Serializable {
 
 private static final long serialVersionUID = 1L;
 	

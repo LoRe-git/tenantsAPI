@@ -3,7 +3,9 @@ package com.tenant.manager.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tenant.manager.dto.BranchDto;
 import com.tenant.manager.dto.TenantDto;
+import com.tenant.manager.model.Branch;
 import com.tenant.manager.model.Tenant;
 
 public class TenantUtils {
@@ -47,5 +49,15 @@ public class TenantUtils {
 		tenantEntity.setGov_Id(tenantDto.getGov_id());
 		return tenantEntity;
 	}
+	
+	public static List<BranchDto> toBranchDtoList(List<Branch> branchEntities) {
+		List<BranchDto> branchDto = new ArrayList<>();
+		branchEntities.stream().forEach(b->{
+			branchDto.add(new BranchDto(b.getBid(), b.getBname(), b.getHid(), b.getRooms()));
+		});
+		System.out.println(branchDto);
+		return branchDto;
+	}
+	
 
 }

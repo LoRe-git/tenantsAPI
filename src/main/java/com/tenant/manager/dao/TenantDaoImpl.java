@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.tenant.manager.model.Branch;
 import com.tenant.manager.model.Tenant;
 
 @Transactional
@@ -43,6 +44,11 @@ public class TenantDaoImpl implements TenantDAO{
 		tenant.setRoom(updatedTenant.getRoom());
 		entityManager.flush();
 		
+	}
+
+	@Override
+	public List<Branch> getBranches(String hid) {
+		return (List<Branch>) entityManager.createQuery("from Branch where hid='" + hid +"'").getResultList();
 	}
 
 }

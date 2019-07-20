@@ -15,16 +15,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tenant.manager.dto.BranchDto;
 import com.tenant.manager.dto.TenantDto;
 import com.tenant.manager.service.TenantJpaService;
+import com.tenant.manager.service.TenantServiceImpl;
 
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("api/v1/tenants")
 public class TenantBaseController {
 
-//	@Autowired
-//	private TenantService tenantService;
+	@Autowired
+	private TenantServiceImpl tenantService;
 
 	@Autowired
 	private TenantJpaService tenantJpaService;
@@ -47,6 +49,7 @@ public class TenantBaseController {
 		 * List<TenantDto> allTenants = tenantService.getAllTenants(); return new
 		 * ResponseEntity<List<TenantDto>>(allTenants, HttpStatus.OK);
 		 */
+		System.out.println("Sysout: " + new ResponseEntity<List<TenantDto>>(tenantJpaService.getAllTenants(), HttpStatus.OK));
 		return new ResponseEntity<List<TenantDto>>(tenantJpaService.getAllTenants(), HttpStatus.OK);
 	}
 
@@ -74,6 +77,11 @@ public class TenantBaseController {
 	@GetMapping("search/{hostelId}/{keyWord}")
 	public ResponseEntity<List<TenantDto>> searchTenants(@PathVariable("keyWord") String keyWord, @PathVariable("hostelId") String hostelID){
 		return new ResponseEntity<List<TenantDto>>(tenantJpaService.searchTenants(keyWord, hostelID), HttpStatus.OK);
+	}
+	
+	@GetMapping("/hostels/{hostelID}")
+	public ResponseEntity<List<BranchDto>> getBlocks(@PathVariable("hostelID") String hid){
+		return new ResponseEntity<List<BranchDto>>(tenantService.getBranches(hid), HttpStatus.OK);
 	}
 
 }

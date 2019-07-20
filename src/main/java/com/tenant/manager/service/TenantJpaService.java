@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tenant.manager.dao.TenantRepository;
+import com.tenant.manager.dto.BranchDto;
 import com.tenant.manager.dto.TenantDto;
 import com.tenant.manager.model.Tenant;
 import com.tenant.manager.utils.TenantUtils;
@@ -19,7 +20,6 @@ public class TenantJpaService implements TenantService{
 	
 	@Override
 	public List<TenantDto> getAllTenants() {
-		
 		return TenantUtils.toConvertDtoList(tenantRepository.findAll());
 	}
 
@@ -50,6 +50,11 @@ public class TenantJpaService implements TenantService{
 	@Override
 	public List<TenantDto> searchTenants(String keyWord, String hID) {
 		return TenantUtils.toConvertDtoList(tenantRepository.searchBy(keyWord, hID));
+	}
+
+	@Override
+	public List<BranchDto> getBranches(String hid) {
+		return null;
 	}
 	
 	

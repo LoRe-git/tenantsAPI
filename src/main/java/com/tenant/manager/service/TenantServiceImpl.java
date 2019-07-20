@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tenant.manager.dao.TenantDAO;
+import com.tenant.manager.dto.BranchDto;
 import com.tenant.manager.dto.TenantDto;
 import com.tenant.manager.utils.TenantUtils;
 
@@ -50,6 +51,12 @@ public class TenantServiceImpl implements TenantService {
 	public List<TenantDto> searchTenants(String keyWord, String hID) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<BranchDto> getBranches(String hid) {
+		// TODO Auto-generated method stub
+		return TenantUtils.toBranchDtoList(tenantDAO.getBranches(hid));
 	}
 		
 }
