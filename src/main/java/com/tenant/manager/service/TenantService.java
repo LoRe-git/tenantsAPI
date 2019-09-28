@@ -3,6 +3,7 @@ package com.tenant.manager.service;
 import java.util.List;
 
 import com.tenant.manager.dto.BranchDto;
+import com.tenant.manager.dto.RoomDto;
 import com.tenant.manager.dto.TenantDto;
 
 public interface TenantService {
@@ -13,4 +14,5 @@ public interface TenantService {
 	void deleteTenant(int id);
 	List<TenantDto> searchTenants(String keyWord, String hID);
 	List<BranchDto> getBranches(String hid);
+	List<RoomDto> getRoomsByBranch(String bid);
 }

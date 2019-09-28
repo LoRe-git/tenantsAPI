@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tenant.manager.dto.BranchDto;
+import com.tenant.manager.dto.RoomDto;
 import com.tenant.manager.dto.TenantDto;
 import com.tenant.manager.model.Branch;
+import com.tenant.manager.model.Room;
 import com.tenant.manager.model.Tenant;
 
 public class TenantUtils {
@@ -49,15 +51,23 @@ public class TenantUtils {
 		tenantEntity.setGov_Id(tenantDto.getGov_id());
 		return tenantEntity;
 	}
-	
+
 	public static List<BranchDto> toBranchDtoList(List<Branch> branchEntities) {
 		List<BranchDto> branchDto = new ArrayList<>();
-		branchEntities.stream().forEach(b->{
+		branchEntities.stream().forEach(b -> {
 			branchDto.add(new BranchDto(b.getBid(), b.getBname(), b.getHid(), b.getRooms()));
 		});
 		System.out.println(branchDto);
 		return branchDto;
 	}
-	
+
+	public static List<RoomDto> toRoomDtoList(List<Room> roomEntities) {
+		System.out.println(roomEntities);
+		List<RoomDto> roomDtos = new ArrayList<>();
+		roomEntities.forEach(
+				r -> roomDtos.add(new RoomDto(r.getRid(), r.getRno(), r.getBid(), r.getCost(), r.getCapacity())));
+		System.out.println(roomDtos);
+		return roomDtos;
+	}
 
 }

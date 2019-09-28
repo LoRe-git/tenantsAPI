@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.tenant.manager.dao.TenantRepository;
 import com.tenant.manager.dto.BranchDto;
+import com.tenant.manager.dto.RoomDto;
 import com.tenant.manager.dto.TenantDto;
 import com.tenant.manager.model.Tenant;
 import com.tenant.manager.utils.TenantUtils;
@@ -54,6 +55,13 @@ public class TenantJpaService implements TenantService{
 
 	@Override
 	public List<BranchDto> getBranches(String hid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<RoomDto> getRoomsByBranch(String bid) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	

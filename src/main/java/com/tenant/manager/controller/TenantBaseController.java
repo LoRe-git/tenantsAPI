@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tenant.manager.dto.BranchDto;
+import com.tenant.manager.dto.RoomDto;
 import com.tenant.manager.dto.TenantDto;
 import com.tenant.manager.service.TenantJpaService;
 import com.tenant.manager.service.TenantServiceImpl;
@@ -82,6 +83,11 @@ public class TenantBaseController {
 	@GetMapping("/hostels/{hostelID}")
 	public ResponseEntity<List<BranchDto>> getBlocks(@PathVariable("hostelID") String hid){
 		return new ResponseEntity<List<BranchDto>>(tenantService.getBranches(hid), HttpStatus.OK);
+	}
+	
+	@GetMapping("/rooms/{branchId}")
+	public ResponseEntity<List<RoomDto>> getRooms(@PathVariable("branchId") String branchId) {
+		return new ResponseEntity<List<RoomDto>>(tenantService.getRoomsByBranch(branchId), HttpStatus.OK);
 	}
 
 }
