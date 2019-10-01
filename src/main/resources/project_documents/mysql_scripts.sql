@@ -53,7 +53,7 @@ create table branch (
     
 
 ALTER TABLE login ADD CONSTRAINT login_hostel_fk FOREIGN KEY (hid) REFERENCES hostel(hid);
-ALTER TABLE room ADD CONSTRAINT room_room_fk FOREIGN KEY (rid) REFERENCES room(rid);
+--ALTER TABLE room ADD CONSTRAINT room_room_fk FOREIGN KEY (rid) REFERENCES room(rid);
 ALTER TABLE room ADD CONSTRAINT room_branch_fk FOREIGN KEY (bid) REFERENCES branch(bid);
 ALTER TABLE branch ADD CONSTRAINT branch_hostel_fk FOREIGN KEY (hid) REFERENCES hostel(hid);
 ALTER TABLE tenant ADD CONSTRAINT tenant_branch_fk FOREIGN KEY (bid) REFERENCES branch(bid);
