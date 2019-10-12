@@ -3,6 +3,8 @@ package com.tenant.manager.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,10 @@ import com.tenant.manager.dao.TenantRepository;
 import com.tenant.manager.dto.BranchDto;
 import com.tenant.manager.dto.RoomDto;
 import com.tenant.manager.dto.TenantDto;
+import com.tenant.manager.jpa.CheckListRepository;
+import com.tenant.manager.jpa.ExpencesRepository;
+import com.tenant.manager.model.Checklist;
+import com.tenant.manager.model.Expences;
 import com.tenant.manager.model.Tenant;
 import com.tenant.manager.utils.TenantUtils;
 
@@ -18,6 +24,12 @@ public class TenantJpaService implements TenantService{
 
 	@Autowired
 	private TenantRepository tenantRepository;
+	
+	@Autowired
+	private CheckListRepository checkListRepository;
+	
+	@Autowired
+	private ExpencesRepository expencesRepository;
 	
 	@Override
 	public List<TenantDto> getAllTenants() {
@@ -64,7 +76,29 @@ public class TenantJpaService implements TenantService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
 
+	@Override
+	public List<TenantDto> getTenantsByHid(String hid) {
+		return null;
+	}
+	
+	@Transactional
+	public boolean saveCheckList(Checklist checklist) {
+		return checkListRepository.save(checklist) != null;
+	}
+
+	@Transactional
+	public List<Checklist> getCheckListsByBid(String bid){
+		return checkListRepository.findByBid(bid);
+	}
+	
+	@Transactional
+	public boolean saveExpence(Expences expence) {
+		return expencesRepository.save(expence) != null;
+	}
+	
+	@Transactional
+	public List<Expences> getExpencesByChecklistID(Integer checklistId){
+		return expencesRepository.findByChecklistid(checklistId);
+	}
 }

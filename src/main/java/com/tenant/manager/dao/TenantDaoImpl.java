@@ -57,4 +57,9 @@ public class TenantDaoImpl implements TenantDAO {
 		return (List<Room>) entityManager.createQuery("from Room where bid ='" + bid + "'").getResultList();
 	}
 
+	@Override
+	public List<Tenant> getTenantsByHid(String hid){
+		return entityManager.createQuery("from Tenant where bid like '" + hid + "%'").getResultList();
+	}
+	
 }

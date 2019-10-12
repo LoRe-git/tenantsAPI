@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tenant.manager.dto.BranchDto;
 import com.tenant.manager.dto.RoomDto;
 import com.tenant.manager.dto.TenantDto;
+import com.tenant.manager.model.Checklist;
+import com.tenant.manager.model.Expences;
 import com.tenant.manager.service.TenantJpaService;
 import com.tenant.manager.service.TenantServiceImpl;
 
@@ -89,5 +91,32 @@ public class TenantBaseController {
 	public ResponseEntity<List<RoomDto>> getRooms(@PathVariable("branchId") String branchId) {
 		return new ResponseEntity<List<RoomDto>>(tenantService.getRoomsByBranch(branchId), HttpStatus.OK);
 	}
+	
+	@GetMapping("/hostel/{hid}")
+	public ResponseEntity<List<TenantDto>> getTenantsByHid(@PathVariable("hid") String hostelId) {
+		return new ResponseEntity<List<TenantDto>>(tenantService.getTenantsByHid(hostelId), HttpStatus.OK);
+	}
 
+	@GetMapping("/checklists/bid/{bid}")
+	public ResponseEntity<List<Checklist>> getChecklistsByBid(@PathVariable("bid") String bid){
+		return new ResponseEntity<List<Checklist>>(tenantJpaService.getCheckListsByBid(bid),HttpStatus.OK);
+	}
+	
+	@PostMapping("/checklists")
+	public HttpStatus saveChecklist(@RequestBody Checklist checklist) {
+		tenantJpaService.saveCheckList(checklist);
+		return HttpStatus.CREATED;
+	}
+	
+	@PostMapping("/expences")
+	public HttpStatus saveExpence(@RequestBody Expences expence) {
+		tenantJpaService.saveExpence(expence);
+		return HttpStatus.CREATED;
+	}
+	
+	@GetMapping("/expences/checklist/{id}")
+	public ResponseEntity<List<Expences>> getExpencesByChecklistId(@PathVariable("id") Integer checklistID){
+		return new ResponseEntity<>(tenantJpaService.getExpencesByChecklistID(checklistID), HttpStatus.OK);
+	}
+	
 }

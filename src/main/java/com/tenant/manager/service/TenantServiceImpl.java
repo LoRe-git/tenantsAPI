@@ -65,5 +65,13 @@ public class TenantServiceImpl implements TenantService {
 		List<Room> rooms = tenantDAO.getRoomsByBranch(bid);
 		return TenantUtils.toRoomDtoList(rooms);
 	}
+
+	@Override
+	public List<TenantDto> getTenantsByHid(String hid) {
+		return TenantUtils.toConvertDtoList(tenantDAO.getTenantsByHid(hid));
+	}
+	
+	
+	
 		
 }

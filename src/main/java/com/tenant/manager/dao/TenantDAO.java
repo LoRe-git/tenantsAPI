@@ -16,4 +16,6 @@ public interface TenantDAO {
 	List<Branch> getBranches(String hid);
 	
 	List<Room> getRoomsByBranch(String bid);
+	
+	List<Tenant> getTenantsByHid(String hid);
 }

@@ -15,4 +15,5 @@ public interface TenantService {
 	List<TenantDto> searchTenants(String keyWord, String hID);
 	List<BranchDto> getBranches(String hid);
 	List<RoomDto> getRoomsByBranch(String bid);
+	List<TenantDto> getTenantsByHid(String hid);
 }
