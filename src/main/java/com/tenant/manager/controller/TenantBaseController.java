@@ -104,6 +104,7 @@ public class TenantBaseController {
 	
 	@PostMapping("/checklists")
 	public HttpStatus saveChecklist(@RequestBody Checklist checklist) {
+		System.out.println("CHECKLIST:: " + checklist);
 		tenantJpaService.saveCheckList(checklist);
 		return HttpStatus.CREATED;
 	}

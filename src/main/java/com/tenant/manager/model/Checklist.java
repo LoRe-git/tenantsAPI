@@ -185,4 +185,14 @@ public class Checklist implements Serializable {
 		this.expences = expences;
 	}
 
+	@Override
+	public String toString() {
+		return "Checklist [checklist_id=" + checklist_id + ", bid=" + bid + ", checklist_date=" + checklist_date
+				+ ", incharge_name=" + incharge_name + ", opening_balance=" + opening_balance + ", admissions="
+				+ admissions + ", vacancies=" + vacancies + ", notice_periods=" + notice_periods + ", complaints="
+				+ complaints + ", collections_cash=" + collections_cash + ", collections_ac=" + collections_ac
+				+ ", collections_pending=" + collections_pending + ", closing_balance=" + closing_balance
+				+ ", water_tankers=" + water_tankers + ", misc=" + misc + ", expences=" + expences + "]";
+	}
+
 }
